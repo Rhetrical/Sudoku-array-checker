@@ -1,0 +1,77 @@
+let puzzle = [[ 8,9,5,   7,4,2,   1,3,6 ],
+              [ 2,7,1,   9,6,3,   4,8,5 ],
+              [ 4,6,3,   5,8,1,   7,9,2 ],
+
+              [ 9,3,4,   6,1,7,   2,5,8 ],
+              [ 5,1,7,   2,3,8,   9,6,4 ],
+              [ 6,8,2,   4,5,9,   3,7,1 ],
+
+              [ 1,5,9,   8,7,4,   6,2,3 ],
+              [ 7,4,6,   3,2,5,   8,1,9 ],
+              [ 3,2,8,   1,9,6,   5,4,7 ]];
+
+//puzzle 2
+let puzzleTwo = [[ 8,9,5,   7,4,2,   1,3,6 ],
+                 [ 8,7,1,   9,6,3,   4,8,5 ],
+                 [ 4,6,3,   5,8,1,   7,9,2 ],
+                 [ 9,3,4,   6,1,7,   2,5,8 ],
+                 [ 5,1,7,   2,3,8,   9,6,4 ],
+                 [ 6,8,2,   4,5,9,   3,7,1 ],
+                 [ 1,5,9,   8,7,4,   6,2,3 ],
+                 [ 7,4,6,   3,2,5,   8,1,9 ],
+                 [ 3,2,8,   1,9,6,   5,4,7 ]];
+
+function getRow(puzzle, row) {
+   let selectRow = puzzle[row]
+   return selectRow
+}
+
+function getColumn(puzzle, col) {
+  let selectCol = [];
+  for(let i = 0; i < 9; i++){
+    selectCol.push(puzzle[i][col]);
+  }
+  return selectCol;
+}
+
+function getSection(puzzle, x, y) {
+  let selectSec = [];
+  for(let j = y * 3; j < (y * 3) + 3; j++){
+    for(let k = x * 3; k < (x * 3) + 3; k++){
+      selectSec.push(puzzle[j][k]);
+    }
+ } 
+ return selectSec
+}
+let test = [1, 2, 3, 4, 5, 8, 7, 6, 9];
+
+function includes1To9(arr){
+  let check = 0
+  for(let l = 1; l < 10; l++){
+    if(arr.includes(l)){
+      check ++
+    }
+  }return (check === 9);
+}
+
+function sudokuIsValid(puzzle) {
+  let finalCheck = 0;
+  for (r = 0; r < 3; r++){
+    for(p = 0; p < 9; p++){
+  if (includes1To9(getRow(puzzle, p)) === true){
+    finalCheck ++
+  } 
+  }
+  if (includes1To9(getColumn(puzzle, p)) === true){
+    finalCheck ++
+    }
+  for(q = 0; q < 3; q++){
+    for(o = 0; o < 3; o++){
+      if(includes1To9(getSection(puzzle, q, o)) === true){
+        finalCheck ++
+      }
+    }
+   }
+  }return (finalCheck === 54);
+}
+console.log(sudokuIsValid(puzzle))
